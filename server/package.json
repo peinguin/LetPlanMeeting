@@ -8,6 +8,8 @@
     "url" : "https://github.com/iLubenets/LetPlanMeeting"
   },
   "dependencies": {
-
+    "passport": "*",
+    "express" : "4.x",
+    "socket.io": "*"
   }
 }
