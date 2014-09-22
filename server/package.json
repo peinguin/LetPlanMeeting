@@ -1,0 +1,13 @@
+{
+  "name": "LetPlanMeeting",
+  "version": "0.0.1",
+  "license": "GNU v2",
+  "main": "app.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/iLubenets/LetPlanMeeting"
+  },
+  "dependencies": {
+
+  }
+}
