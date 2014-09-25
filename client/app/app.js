@@ -1,17 +1,4 @@
-App = Ember.Application.create();
-
-App.MainModel = Ember.Object.extend({
-  connected: false,
-  user: null
-}).create();
-
-App.IndexRoute = Ember.Route.extend({
-  model: function() {
-    return App.MainModel;
-  }
-});
-
-var app = function () {
+var socketConnect = function () {
   var socket = io(config.proto + '://' + config.host + ':' + config.port);
   socket.on('connect', function(){
     App.MainModel.set('connected', true);
@@ -25,4 +12,20 @@ var app = function () {
   });
 };
 
-$(app);
+App = Ember.Application.extend({
+  init: function(){
+    socketConnect();
+    this._super();
+  }
+}).create();
+
+App.MainModel = Ember.Object.extend({
+  connected: false,
+  user: null
+}).create();
+
+App.IndexRoute = Ember.Route.extend({
+  model: function() {
+    return App.MainModel;
+  }
+});
