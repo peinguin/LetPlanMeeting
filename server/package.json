@@ -1,5 +1,5 @@
 {
-  "name": "LetPlanMeeting",
+  "name": "LetPlanMeetingServer",
   "version": "0.0.1",
   "license": "GNU v2",
   "main": "app.js",
@@ -9,7 +9,17 @@
   },
   "dependencies": {
     "passport": "*",
+    "passport-google": "*",
+    "passport-twitter": "*",
+    "passport-facebook": "*",
+    "passport-local": "*",
     "express" : "4.x",
-    "socket.io": "*"
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "express-session": "*",
+    "socket.io": "*",
+    "socket.io-client": "*",
+    "sequelize": "*",
+    "async": "*"
   }
 }

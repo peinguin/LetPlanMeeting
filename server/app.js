@@ -1,12 +1,28 @@
-var express = require('express')
-  ,socket.io = require('socket.io')
-  ,user     = require('./user')
-  ,config   = require('./config');
+var config  = require('./config')
+  , bodyParser = require('body-parser')
+  , cookieParser = require('cookie-parser')()
+  , session = require('./session')
+  , passport = require('passport');
 
-var app = express();
+var app = require('express')();
+var server = require('http').Server(app);
 
-io = socket.io(app);
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+app.use(cookieParser);
+app.use(session);
 
-user(io);
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.listen(config.port, config.host);
+require('./static')(app);
+require('./auth')(app);
+require('./io')(server);
+
+app.get('/123', function (req, res) {
+  res.end(req.user && req.user.email);
+})
+
+server.listen(config.port, config.host);

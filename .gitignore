@@ -1,2 +1,6 @@
-server/config.js
 server/node_modules/*
+server/config.js
+server/db.sqlite
+
+client/node_modules/*
+client/config.js

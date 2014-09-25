@@ -1,4 +1,16 @@
 module.exports = exports = {
   port: '8082',
-  host: '127.0.0.1'
+  host: '127.0.0.1',
+  proto: 'http',
+  auth: {
+    twitter: {
+      key: '',
+      secret: ''
+    },
+    facebook: {
+      id: '',
+      secret: ''
+    }
+  },
+  sessionSecret: 'secret'
 }

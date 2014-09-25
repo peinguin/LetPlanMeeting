@@ -1,0 +1,10 @@
+{
+  "name": "LetPlanMeetingClient",
+  "version": "0.0.1",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-ember-templates": "*"
+  }
+}
