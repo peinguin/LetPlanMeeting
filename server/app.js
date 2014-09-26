@@ -30,7 +30,7 @@ db
       throw err[0];
     } else {
       server.listen(config.port, config.host, function(){
-        console.log('Express server (' + config.host + ') listening on port ' + config.host);
+        console.log('Express server (' + config.host + ') listening on port ' + config.port);
       })
     }
   })

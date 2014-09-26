@@ -10,8 +10,15 @@ module.exports = function(grunt) {
         tasks: ['default'],
         options: {
           spawn: false,
-        },
+        }
       },
+      templates: {
+        files: 'app/templates/**/*.hbs',
+        tasks: 'emberTemplates',
+        options: {
+          spawn: false,
+        }
+      }
     },
     jshint: {
       all: [

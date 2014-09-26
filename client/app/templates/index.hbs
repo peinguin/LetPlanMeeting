@@ -1,5 +1,8 @@
-{{#if user}}
-  <h1>Hello, {{user.email}}</h1>
-{{else}}
-  {{partial "login"}}
+{{#if connected}}
+  {{#if user}}
+    {{partial "hello"}}
+  {{else}}
+    {{partial "login"}}
+  {{/if}}
+  {{outlet}}
 {{/if}}

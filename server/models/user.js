@@ -1,3 +1,5 @@
+var Q = require('q');
+
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
     email: {
@@ -17,13 +19,14 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         User.hasMany(models.AuthData);
       },
-      create: function(cb, email, provider, value) {
+      register: function(email, provider, value, cb) {
+        var dfd = Q.Defer();
         sequelize.transaction(function(t) {
           async.waterfall([
             function(cb){
               User.create({email: email},
                 { transaction: t })
-                .success(function(user){cb(null, user)});
+                .success(function(user){cb(null, user)})
                 .error(function(err){cb(err)});
             },
             function(user, cb){
@@ -34,7 +37,7 @@ module.exports = function(sequelize, DataTypes) {
                   value: value
                 },
                 { transaction: t })
-                .success(function(auth){cb(null)});
+                .success(function(auth){cb(null)})
                 .error(function(err){cb(err)});
             }
           ],
@@ -45,8 +48,15 @@ module.exports = function(sequelize, DataTypes) {
               t.commit();
             }
           });
-          t.done(cb);
+          t.done(function(){
+            if(typeof cb === 'function'){
+              cb();
+            }
+            dfd.resolve();
+          });
         });
+
+        return dfd.promise;
       }
     }
   });

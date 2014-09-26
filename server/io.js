@@ -36,8 +36,6 @@ module.exports = exports = function(server){
       }
       if(user){
         init(socket);
-      }else{
-        socket.disconnect();
       }
     });
   }

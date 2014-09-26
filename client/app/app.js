@@ -1,5 +1,6 @@
+var socket;
 var socketConnect = function () {
-  var socket = io(config.proto + '://' + config.host + ':' + config.port);
+  socket = io(config.proto + '://' + config.host + ':' + config.port);
   socket.on('connect', function(){
     App.MainModel.set('connected', true);
     socket.on('hello', function(user){
@@ -27,5 +28,15 @@ App.MainModel = Ember.Object.extend({
 App.IndexRoute = Ember.Route.extend({
   model: function() {
     return App.MainModel;
+  },
+  actions: {
+    logout: function() {
+      var self = this;
+      window.location = "/logout";
+    }
   }
+});
+
+App.Router.map(function() {
+  this.route('logout');
 });

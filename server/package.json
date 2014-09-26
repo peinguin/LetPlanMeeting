@@ -20,6 +20,8 @@
     "socket.io": "*",
     "socket.io-client": "*",
     "sequelize": "*",
-    "async": "*"
+    "sqlite3": "*",
+    "async": "*",
+    "q": "*"
   }
 }

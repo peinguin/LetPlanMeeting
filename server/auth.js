@@ -35,7 +35,7 @@ module.exports = exports = function(app){
 
   app.get('/auth/google/return', 
     passport.authenticate('google', { successRedirect: '/',
-                                      failureRedirect: '/login' }));
+                                      failureRedirect: '/#login' }));
 
   if(
     typeof config.auth.twitter === 'object' &&
@@ -111,11 +111,24 @@ module.exports = exports = function(app){
 
   app.post('/login',
     passport.authenticate('local', { successRedirect: '/',
-                                     failureRedirect: '/login',
+                                     failureRedirect: '/#login',
                                      failureFlash: false }));
 
-  app.post('/register', function(){
+  app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');});
 
+  app.post('/register', function(req, res, next){
+    db.User.find({ where: { email: req.body.email } }).success(function(user){
+      if(user){
+        res.end(JSON.stringify({error:'User already exist'}));
+      }else{
+        // TODO: send email
+        db.User.register().then(function(){
+          res.redirect('/');
+        });
+      }
+    });
   });
 
 };

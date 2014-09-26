@@ -1,7 +1,7 @@
 var fs        = require('fs')
   , path      = require('path')
   , Sequelize = require('sequelize')
-  , sequelize = var sequelize = new Sequelize('database', null, null, {
+  , sequelize = new Sequelize('database', null, null, {
     dialect: 'sqlite',
     storage: __dirname + '/../db.sqlite'
   })
