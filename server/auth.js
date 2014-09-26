@@ -1,9 +1,10 @@
-var passport = require('passport')
-  , config = require('./config')
-  , GoogleStrategy = require('passport-google').Strategy
-  , TwitterStrategy = require('passport-twitter').Strategy
+var passport         = require('passport')
+  , config           = require('./config')
+  , db               = require('./models')
+  , GoogleStrategy   = require('passport-google').Strategy
+  , TwitterStrategy  = require('passport-twitter').Strategy
   , FacebookStrategy = require('passport-facebook').Strategy
-  , LocalStrategy = require('passport-local').Strategy;
+  , LocalStrategy    = require('passport-local').Strategy;
 
 module.exports = exports = function(app){
   passport.serializeUser(function(user, done) { 
@@ -112,5 +113,9 @@ module.exports = exports = function(app){
     passport.authenticate('local', { successRedirect: '/',
                                      failureRedirect: '/login',
                                      failureFlash: false }));
+
+  app.post('/register', function(){
+
+  });
 
 };

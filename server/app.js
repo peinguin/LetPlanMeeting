@@ -1,8 +1,9 @@
-var config  = require('./config')
-  , bodyParser = require('body-parser')
+var config       = require('./config')
+  , bodyParser   = require('body-parser')
   , cookieParser = require('cookie-parser')()
-  , session = require('./session')
-  , passport = require('passport');
+  , session      = require('./session')
+  , passport     = require('passport')
+  , db           = require('./models');
 
 var app = require('express')();
 var server = require('http').Server(app);
@@ -21,8 +22,15 @@ require('./static')(app);
 require('./auth')(app);
 require('./io')(server);
 
-app.get('/123', function (req, res) {
-  res.end(req.user && req.user.email);
-})
-
-server.listen(config.port, config.host);
+db
+  .sequelize
+  .sync()
+  .complete(function(err) {
+    if (err) {
+      throw err[0];
+    } else {
+      server.listen(config.port, config.host, function(){
+        console.log('Express server (' + config.host + ') listening on port ' + config.host);
+      })
+    }
+  })
